@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PyExeBuilder Kullanım Kılavuzu</title>
+<link rel="stylesheet" href="appearance.css">
+</head>
+<body>
+<header class="bar"><strong>PyExeBuilder</strong><button id="menuBtn" type="button">İçindekiler</button></header>
+<nav id="toc" aria-label="İçindekiler">
+  <p class="brand">PyExeBuilder<span>Kullanım kılavuzu</span></p>
+  <a href="#baslangic">Başlangıç</a>
+  <a href="#hakkinda">Hakkında</a>
+  <a href="#python">Python’u indirme</a>
+  <a href="#kullanim">Ekran ekran anlatım</a>
+  <a href="#secenekler">Seçenekler</a>
+  <a href="#nasil">Nasıl çalışır</a>
+  <a href="#sss">Sık sorulan sorular</a>
+</nav>
+<main>
+<section id="baslangic" class="hero">
+  <h1>Python dosyanızı birkaç soruda .exe yapın</h1>
+  <p class="lead"><code>PyExeBuilder.bat</code> dosyasını çalıştırın, ekrandaki soruları yanıtlayın. Kütüphaneleri bulup kurmak, exe’yi derlemek ve istenirse kurulum paketi hazırlamak aracın işidir.</p>
+  <pre class="term" aria-label="Programdan örnek ekran"><span class="t">Exe çıktı biçimini seçin</span>
+<span class="t">------------------------</span>
+
+     Tek dosya (--onefile), konsol penceresi açık
+<span class="sel">   &gt; Tek dosya (--onefile), pencereli/konsolsuz (--noconsole)</span>
+     Klasör halinde (--onedir), konsol penceresi açık
+     Klasör halinde (--onedir), pencereli/konsolsuz (--noconsole)
+
+<span class="dim">   Yine de tek bir .exe oluşur, yalnızca konsol penceresi görünmez.</span></pre>
+  <p class="note">Gerekenler: Windows ve Python 3. Henüz Python yoksa bir sonraki bölümden başlayın.</p>
+</section>
+
+<section id="hakkinda">
+  <h2>Hakkında</h2>
+  <p class="note">Bu proje tamamen açık kaynak kodludur. Genç bir yazılım meraklısı tarafından 3 ayda geliştirildi ve hâlâ geliştirilmeye devam ediyor. Yeniden dağıtımı, kullanımı ve değiştirilmiş sürümlerin paylaşılması serbesttir.</p>
+  <p class="note">Türkçe sürümün İngilizceye çevrilmesine katkılarından dolayı İngilizce öğretmenime teşekkür ederim.</p>
+</section>
+
+<section id="python">
+  <h2>Python’u indirme</h2>
+  <ol class="steps">
+    <li><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">python.org/downloads/windows</a> adresine gidin ve en güncel Python 3 yükleyicisini indirin. 64 bit (<em>Windows installer (64-bit)</em>) çoğu bilgisayar için doğru seçimdir.</li>
+    <li>Yükleyicinin ilk ekranında alttaki <strong>Add python.exe to PATH</strong> kutusunu işaretleyin, sonra <strong>Install Now</strong> düğmesine basın.</li>
+    <li>Özel kurulum yaparsanız <strong>tcl/tk and IDLE</strong> seçili kalsın. Pencereli programlar ve kurulum sihirbazı buna ihtiyaç duyar.</li>
+    <li>Kurulum bitince <kbd>Win</kbd>+<kbd>R</kbd> ile <code>cmd</code> yazıp şunu çalıştırın: <code>python --version</code>. Bir sürüm numarası görüyorsanız hazırsınız.</li>
+  </ol>
+  <p class="note">Kurulum paketi özelliği için Python 3.9 veya üstü gerekir. 32 bit exe üretecekseniz 32 bit Python da kurmalısınız; araç hangi sürümlerin yüklü olduğunu kendisi tarar.</p>
+</section>
+
+<section id="kullanim">
+  <h2>Ekran ekran anlatım</h2>
+  <p>Araç, siyah bir pencerede (terminal) sorular sorar. Aşağıda her ekranın nasıl göründüğünü, ne anlama geldiğini ve ne yapmanız gerektiğini bulabilirsiniz.</p>
+  <h3>Menüler nasıl kullanılır?</h3>
+  <p>Seçenek listesi çıkınca <kbd>↑</kbd> <kbd>↓</kbd> tuşlarıyla gezin, <kbd>Enter</kbd> ile onaylayın. Fare çalışmaz. Açık renkli satır şu an seçili olandır; altındaki gri yazı o seçeneğin ne yaptığını anlatır.</p>
+  <article class="screen"><h3>1. Yol sorusu</h3>
+    <pre class="term"><span class="t">Python dosyanızı / proje klasörünüzü seçiniz</span>
+
+<span class="dim">   Tam yolu aşağıya yapıştırın (dosyayı bu
+   pencereye sürükleyip bırakabilirsiniz).</span>
+
+   Yol: <b>_</b></pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Araç hangi programı exe yapacağını soruyor. “Yol”, dosyanın bilgisayardaki adresidir (örnek: <code>C:\Projem\main.py</code>).</p><p><strong>Ne yapmalıyım?</strong> Dosyayı Windows Gezgini’nden bu pencereye sürükleyip bırakın; yol kendiliğinden yazılır. Sonra <kbd>Enter</kbd>’a basın. “Bu yol bulunamadı” çıkarsa yolu kontrol edip yeniden deneyin.</p></div></article>
+  <article class="screen"><h3>2. Proje adı</h3>
+    <pre class="term"><span class="t">Proje adını yazın</span>
+
+<span class="dim">   EXE dosyası ve diğer bileşenler, bu adla
+   oluşturulacak bir klasöre çıktılanacaktır.</span>
+
+   Proje adı (boş bırakırsanız: Projem): <b>_</b></pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Üretilecek exe’nin ve çıktı klasörünün adı. Ayrıca “bu klasör zaten mevcut” diye bir menü çıkarsa aynı adın daha önce kullanıldığını gösterir.</p><p><strong>Ne yapmalıyım?</strong> Beğendiğiniz bir ad yazın ya da <kbd>Enter</kbd> ile önerileni kabul edin. Klasör zaten varsa ve eski bir derlemenize aitse “Bu klasörü kullan” güvenlidir (üzerine yazılır). Başka bir şey içeriyorsa “Başka bir ad gir”i seçin.</p></div></article>
+  <article class="screen"><h3>3. Dosya seçimi (klasör verdiyseniz)</h3>
+    <pre class="term"><span class="t">Derlemeye dahil edilecek dosyaları seçin</span>
+
+   Klasör: C:\Projem
+   Seçili dosya sayısı: 3 / 5
+
+<span class="sel">   &gt; &gt;&gt; Seçimi tamamla ve devam et</span>
+     [*] Bu klasördeki TÜM dosyaları seç / kaldır
+     [x] main.py
+     [x] araclar.py
+     [ ] notlar.txt</pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Exe’nin içine hangi dosyaların konacağını seçiyorsunuz. <code>[x]</code> seçili, <code>[ ]</code> seçili değil demektir. “Seçili dosya sayısı 3 / 5”: 5 dosyadan 3’ü seçilmiş.</p><p><strong>Ne yapmalıyım?</strong> Programınızın çalışması için gereken her dosyayı (.py, resim, ses, ayar) seçin. <kbd>Boşluk</kbd> seçer/kaldırır. Bittiğinde en üstteki “Seçimi tamamla” satırında <kbd>Enter</kbd>’a basın. Klasör satırlarında <kbd>Enter</kbd> ile klasörün içine girersiniz, <kbd>Esc</kbd> ile bir üst seviyeye dönersiniz.</p></div></article>
+  <article class="screen"><h3>4. Ana dosya</h3>
+    <pre class="term"><span class="t">Programın başladığı ana .py dosyasını seçin</span>
+
+<span class="sel">   &gt; main.py</span>
+     araclar.py
+     yardimci.py</pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Birden fazla .py dosyanız varsa araç hangisinin “başlatan” dosya olduğunu bilemez.</p><p><strong>Ne yapmalıyım?</strong> Programı çalıştırmak için normalde çift tıkladığınız dosyayı seçin. Genelde <code>main.py</code> veya <code>app.py</code>; araç bunları listenin başına koyar.</p></div></article>
+  <article class="screen"><h3>5. 32 mi 64 bit mi?</h3>
+    <pre class="term"><span class="t">Lütfen exe dosyasının kaç bit olarak işleneceğini seçin</span>
+
+     32 bit (x86)
+<span class="sel">   &gt; 64 bit (x64)</span>
+
+<span class="dim">   Günümüz Windows sistemlerinin standardı...
+   Emin değilseniz bunu seçin.</span></pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Exe’nin hangi tür Windows’ta çalışacağı. Güncel bilgisayarların çoğu 64 bittir; 32 bit çok eski sistemler içindir.</p><p><strong>Ne yapmalıyım?</strong> Emin değilseniz <strong>64 bit</strong> seçin. 32 bit seçerseniz bilgisayarınızda 32 bit Python kurulu olmalıdır.</p></div></article>
+  <article class="screen"><h3>6. Python sürümü</h3>
+    <pre class="term"><span class="t">Kullanılacak Python 3 sürümünü seçin (64 bit)</span>
+
+<span class="sel">   &gt; Python 3.12.1  (64 bit)   C:\Python312\python.exe</span>
+     Python 3.10.4  (64 bit)   C:\Python310\python.exe</pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Bilgisayarınızda kurulu Python’lar listeleniyor. Exe, seçtiğiniz Python ile derlenir. “Sistemde Python 3 bulunamadı” çıkarsa hiç Python yok demektir.</p><p><strong>Ne yapmalıyım?</strong> Birden fazla varsa en yeniyi seçin (kurulum paketi için 3.9 ve üstü gerekir). Hiç yoksa <a href="#python">Python’u indirme</a> bölümüne dönün.</p></div></article>
+  <article class="screen"><h3>7. Çıktı biçimi</h3>
+    <pre class="term"><span class="t">Exe çıktı biçimini seçin</span>
+
+     Tek dosya (--onefile), konsol penceresi açık
+<span class="sel">   &gt; Tek dosya (--onefile), pencereli/konsolsuz (--noconsole)</span>
+     Klasör halinde (--onedir), konsol penceresi açık
+     Klasör halinde (--onedir), pencereli/konsolsuz (--noconsole)</pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> “Tek dosya”: her şey tek bir .exe içinde. “Klasör halinde”: exe ve yardımcı dosyalar bir klasörde. “Konsol penceresi açık”: çalışırken siyah pencere görünür. “Pencereli/konsolsuz”: görünmez.</p><p><strong>Ne yapmalıyım?</strong> Kendi arayüzü (pencere, düğme) olan program için “konsolsuz”, yazıyla çalışan program için “konsol açık” seçin. Karar veremezseniz <a href="#secenekler">Seçenekler</a>’deki seçiciyi kullanın.</p></div></article>
+  <article class="screen"><h3>8. İkon</h3>
+    <pre class="term"><span class="t">İkon bulundu</span>
+
+   <span style="color:#7fd1a0">C:\Projem\icon.ico</span>
+
+<span class="dim">   Bu dosya exe ikonu VE pencerelerin sol üst
+   köşesindeki logo olarak kullanılacak.
+   Devam etmek için bir tuşa basın...</span></pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Projenizde <code>icon</code> veya <code>logo</code> adlı bir resim bulundu; exe’nin simgesi olacak. Birden fazla bulunursa liste çıkar ve birini seçersiniz (“İkon kullanma” = varsayılan Python simgesi).</p><p><strong>Ne yapmalıyım?</strong> Doğruysa herhangi bir tuşa basın. İkon yoksa bu ekran hiç çıkmaz; sorun değil.</p></div></article>
+  <article class="screen"><h3>9. Kütüphaneler</h3>
+    <pre class="term"><span class="t">Gerekli kütüphaneler tespit ediliyor...</span>
+
+   Kaynak: requirements.txt
+     - requests
+     - pillow
+
+<span class="dim">   Devam etmek için bir tuşa basın...</span></pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Kütüphane, programınızın kullandığı hazır paketlerdir (<code>import requests</code> gibi). Araç bunları kendisi buldu ve kuracak. “Harici kütüphane tespit edilmedi” yazarsa programınız yalnızca Python’un kendi araçlarını kullanıyor demektir.</p><p><strong>Ne yapmalıyım?</strong> Liste doğru görünüyorsa bir tuşa basın. Bir paket eksikse işlemi kapatıp proje klasörüne <code>requirements.txt</code> ekleyin.</p></div></article>
+  <article class="screen"><h3>10. Hazırlık ve derleme</h3>
+    <pre class="term"><span class="t">Python ortamı hazırlanıyor</span>
+
+   pip güncelleniyor...
+   Zaten kurulu, atlanıyor.
+   ✓ ... tamamlandı.
+
+<span class="t">EXE derleniyor</span>
+<span class="dim">   Bu işlem projenin büyüklüğüne göre
+   birkaç dakika sürebilir...</span></pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> <code>pip</code>, Python’un paket yükleyicisidir. ✓ işareti adımın başarılı bittiğini, ✗ başarısız olduğunu gösterir. Pencere dönen bir simgeyle bekliyorsa araç çalışıyor demektir.</p><p><strong>Ne yapmalıyım?</strong> Hiçbir şey yapmayın, pencereyi kapatmayın. “Kurulamayan paketler var. Devam edilsin mi?” çıkarsa listelenen paketler kurulamamıştır. Programınız onlara ihtiyaç duyuyorsa <kbd>H</kbd> veya <kbd>N</kbd> ile işlemi iptal edip günlüğe bakın; devam etmek için başka herhangi bir tuşa basın.</p></div></article>
+  <article class="screen"><h3>11. Kurulum paketi sorusu</h3>
+    <pre class="term"><span class="t">Derleme ek olarak kurulum ister misiniz?</span>
+
+<span class="sel">   &gt; Evet, kurulum paketi oluştur</span>
+     Hayır, sadece derleme yeterli</pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> “Kurulum paketi”, programınızı başkasının bilgisayarına kurduran bir sihirbazdır (kısayol ve kaldırma aracı ekler). Sadece exe istiyorsanız gerekmez.</p><p><strong>Ne yapmalıyım?</strong> Programı başkalarına dağıtacaksanız “Evet”, yalnızca kendiniz kullanacaksanız “Hayır” seçin. “Evet” daha uzun sürer.</p></div></article>
+  <article class="screen"><h3>12. Sonuç</h3>
+    <pre class="term"><span class="t">Sonuç</span>
+
+   Çıktı klasörü:
+   C:\Projem\Projem
+
+   EXE dosyasının tam yolu:
+   C:\Projem\Projem\Projem.exe
+   Boyut: 14,2 MB
+
+<span class="dim">   Klasörü açmak için O, çıkmak için başka
+   bir tuşa basın.</span></pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> İşlem bitti. Exe’niz, proje klasörünüzde proje adıyla açılan klasörün içindedir.</p><p><strong>Ne yapmalıyım?</strong> <kbd>O</kbd> tuşu klasörü açar. “--onedir seçtiniz…” notunu görürseniz exe’yi tek başına değil klasörün tamamını taşıyın.</p></div></article>
+  <article class="screen"><h3>Hata ekranları</h3>
+    <pre class="term"><span style="color:#ff8a8a">HATA OLUŞTU</span>
+
+   Mesaj        : ...
+   Hata raporu  : C:\Projem\PyExeBuilder_Logs\hata_....log
+
+<span style="color:#ff8a8a">   Derleme BAŞARISIZ oldu.</span></pre>
+    <div class="why"><p><strong>Bu ne demek?</strong> Bir adım başarısız oldu. Araç ne olduğunu ve ayrıntılı bir günlük dosyasının yerini yazar.</p><p><strong>Ne yapmalıyım?</strong> “Hata raporu” satırındaki dosyayı açıp son satırlara bakın. Mesajı ve dosyayı yardım alırken paylaşabilirsiniz.</p></div></article>
+</section>
+
+<section id="secenekler">
+  <h2>Seçenekler</h2>
+  <h3>Çıktı biçimi</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Biçim</th><th>Sonuç</th><th>En uygun olduğu projeler</th></tr></thead>
+    <tbody>
+    <tr><td>Tek dosya, konsol açık</td><td>Tek bir .exe. Çalışırken siyah konsol penceresi açılır.</td><td>Komut satırı araçları, betikler, çıktısını izlemek istediğiniz botlar.</td></tr>
+    <tr><td>Tek dosya, konsolsuz</td><td>Tek bir .exe. Konsol penceresi görünmez.</td><td>Tkinter, PyQt, PySide, Kivy gibi pencereli programlar. Tek dosya olarak paylaşmak için en kolayı.</td></tr>
+    <tr><td>Klasör, konsol açık</td><td>Exe ve bağımlılıkları bir klasörde. Açılış daha hızlıdır.</td><td>Sık çalıştırılan komut satırı araçları.</td></tr>
+    <tr><td>Klasör, konsolsuz</td><td>Klasör halinde, konsol yok. Açılış hızlıdır.</td><td>Oyunlar, çok dosyalı ve büyük arayüzlü uygulamalar.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>32 bit mi, 64 bit mi?</h3>
+  <p>64 bit günümüz Windows sistemlerinin standardıdır ve 32 bit Windows’ta çalışmaz. 32 bit exe eski sistemlerde de çalışır ama bellek 4 GB ile sınırlıdır ve bilgisayarınızda 32 bit Python kurulu olmalıdır.</p>
+  <h3>Kurulum paketi</h3>
+  <p>Evet derseniz <code>ProjeAdı_Kurulum.exe</code> üretilir: ilerleme çubuklu bir kurulum sihirbazı, masaüstü ve Başlat menüsü kısayolları ve bir kaldırma aracı içerir. Çıktı büyük ölçüde sıkıştırılır. Yalnızca exe yeterliyse Hayır deyin.</p>
+  <div class="chooser">
+    <label for="kind">Projem hangi türde?</label>
+    <select id="kind">
+      <option value="">Seçin…</option>
+      <option value="gui">Pencereli uygulama (Tkinter, PyQt…)</option>
+      <option value="cli">Komut satırı aracı veya betik</option>
+      <option value="bot">Bot veya sunucu</option>
+      <option value="game">Oyun (pygame vb.)</option>
+      <option value="share">Tek dosya olarak göndereceğim</option>
+    </select>
+    <p id="pick" aria-live="polite">Proje türünü seçince önerilen biçim burada görünür.</p>
+  </div>
+</section>
+
+<section id="nasil">
+  <h2>Nasıl çalışır</h2>
+  <ol class="steps plain">
+    <li><strong>Tarama.</strong> <code>requirements.txt</code> varsa ondan okunur; yoksa seçtiğiniz dosyalardaki <code>import</code> satırları taranır. Standart kütüphane ve kendi modülleriniz elenir.</li>
+    <li><strong>Hazırlık.</strong> Seçtiğiniz Python’da pip güncellenir ve eksik kütüphaneler <code>--user</code> ile kalıcı olarak kurulur.</li>
+    <li><strong>Derleme.</strong> PyInstaller exe’yi üretir. Sık sorun çıkaran kütüphaneler için gizli import ve veri dosyaları araç tarafından otomatik eklenir.</li>
+    <li><strong>Çıktı.</strong> Sonuç, proje klasörünüzde proje adıyla açılan klasöre kopyalanır.</li>
+    <li><strong>Kurulum paketi</strong> (isteğe bağlı). Çıktı 250 MB’lık parçalara bölünüp paralel sıkıştırılır ve sihirbaz exe’sine gömülür.</li>
+  </ol>
+</section>
+
+<section id="sss">
+  <h2>Sık sorulan sorular</h2>
+  <input id="faqSearch" type="search" placeholder="Soru ara…" aria-label="Soru ara">
+  <details><summary>“Sistemde Python 3 bulunamadı” hatası alıyorum.</summary><p>Python 3 kurulu değil ya da seçtiğiniz bit sürümüyle uyuşmuyor. <a href="#python">Python’u indirme</a> bölümündeki adımlarla kurup aracı yeniden çalıştırın.</p></details>
+  <details><summary>Exe çalışınca siyah bir pencere açılıyor.</summary><p>Konsol açık bir biçim seçmişsiniz. Pencereli programlar için “konsolsuz” biçimlerden birini seçip yeniden derleyin.</p></details>
+  <details><summary>Exe açılıyor ama “ModuleNotFoundError” veriyor.</summary><p>Kütüphane otomatik taramada çıkmamış olabilir. Proje klasörüne, gerekli paketleri satır satır yazdığınız bir <code>requirements.txt</code> koyup yeniden derleyin.</p></details>
+  <details><summary>Antivirüs exe’mi zararlı olarak işaretledi.</summary><p>PyInstaller ile üretilen exe’lerde bu yanlış alarm sık görülür. Dosyayı antivirüs programınıza güvenli olarak bildirebilir veya istisna ekleyebilirsiniz. Kendi ürettiğiniz dosyaları antivirüs firmasına bildirmeden önce farklı makinelerde denemeniz iyi olur.</p></details>
+  <details><summary>Araç bilgisayarıma kütüphane kuruyor mu?</summary><p>Evet. Gerekli paketler seçtiğiniz Python sürümüne <code>--user</code> ile kalıcı olarak kurulur.</p></details>
+  <details><summary>Kurulum paketi programı nereye kurar?</summary><p>Kurulum sihirbazı kullanıcı hesabına kurar, masaüstü ve Başlat menüsü kısayolu ekler. Program Windows’un “Uygulamalar” listesine de kaydedilir, buradan veya kaldırma aracıyla silinebilir.</p></details>
+  <details><summary>Bir hata oldu, nereye bakmalıyım?</summary><p>Ekrandaki hata raporu ve oturum günlüğü proje klasörünüzdeki <code>PyExeBuilder_Logs</code> klasörüne yazılır. Yazılamazsa TEMP veya kullanıcı klasörü kullanılır.</p></details>
+  <details><summary>Bu kılavuzu tekrar nasıl açarım?</summary><p>Araç klasöründeki <code>Web\usermanual.html</code> dosyasına çift tıklayın. Kılavuzun başlangıçta tekrar sorulması için <code>Wlogin</code> klasöründeki ayar dosyasında ilgili değeri <code>false</code> yapın.</p></details>
+  <p id="faqEmpty" hidden>Eşleşen soru bulunamadı.</p>
+</section>
+</main>
+<script src="javascript.js"></script>
+</body>
+</html>
